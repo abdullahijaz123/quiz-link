@@ -148,7 +148,13 @@
         ]
     }
     ```
-*   **Response**: Returns created Quiz object.
+*   **Response**:
+    ```json
+    {
+        "msg": "Quiz created successfully",
+        "quiz": { ... }
+    }
+    ```
 
 #### 2. Delete Quiz (Teacher/Admin)
 *   **Endpoint**: `DELETE /api/quizzes/delete/:id`
