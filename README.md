@@ -67,6 +67,12 @@
     }
     ```
 
+#### 3. Logout
+*   **Endpoint**: `POST /api/auth/logout`
+*   **Access**: Private (Requires JWT to be valid)
+*   **Description**: Logout user.
+*   **Response**: `{"msg": "Logged out successfully"}`
+
 ### Departments
 
 #### 1. Get All Departments

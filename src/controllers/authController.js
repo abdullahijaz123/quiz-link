@@ -80,3 +80,10 @@ exports.login = (req, res, next) => {
         });
     })(req, res, next);
 };
+
+// Logout User
+exports.logout = (req, res) => {
+    // Since we are using stateless JWTs, "logout" is strictly client-side (deleting the token).
+    // The server just acknowledges the request.
+    res.json({ msg: 'Logged out successfully' });
+};
