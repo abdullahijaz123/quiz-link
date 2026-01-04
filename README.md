@@ -174,6 +174,25 @@
 *   **Response**: Returns Assignment object.
     *   *Error*: Returns 400 if Student is in a different Department.
 
+#### 4. Get Quiz Results (Teacher/Admin)
+*   **Endpoint**: `GET /api/quizzes/results/:quizId`
+*   **Access**: Private (Teacher/Admin) - *Note: Teachers can only view results for their own quizzes.*
+*   **Response**:
+    ```json
+    [
+        {
+            "_id": "...",
+            "student": {
+                "_id": "...",
+                "name": "Student Name",
+                "email": "student@email.com"
+            },
+            "score": 85,
+            "completedAt": "2024-..."
+        }
+    ]
+    ```
+
 ### Student Quiz Access
 
 #### 1. Get Pending Quizzes (Student)
