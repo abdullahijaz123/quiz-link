@@ -124,3 +124,46 @@
 -   `src/controllers/`: Logic for routes.
 -   `src/routes/`: API endpoint definitions.
 -   `src/utils/`: Helper scripts (seeding).
+
+### Quiz Management
+
+#### 1. Create Quiz (Teacher/Admin)
+*   **Endpoint**: `POST /api/quizzes/create`
+*   **Access**: Private (Teacher/Admin)
+*   **Payload**:
+    ```json
+    {
+        "title": "Math Quiz 1",
+        "description": "Algebra Basics",
+        "departmentId": "...",
+        "questions": [
+            {
+                "questionText": "What is 2+2?",
+                "options": [
+                    { "key": "a", "text": "3" },
+                    { "key": "b", "text": "4" }
+                ],
+                "correctAnswer": "b"
+            }
+        ]
+    }
+    ```
+*   **Response**: Returns created Quiz object.
+
+#### 2. Delete Quiz (Teacher/Admin)
+*   **Endpoint**: `DELETE /api/quizzes/delete/:id`
+*   **Access**: Private (Teacher/Admin) - *Note: Teachers can only delete their own quizzes.*
+*   **Response**: `{"msg": "Quiz removed"}`
+
+#### 3. Assign Quiz (Teacher/Admin)
+*   **Endpoint**: `POST /api/quizzes/assign`
+*   **Access**: Private (Teacher/Admin)
+*   **Payload**:
+    ```json
+    {
+        "quizId": "...",
+        "studentId": "..."
+    }
+    ```
+*   **Response**: Returns Assignment object.
+    *   *Error*: Returns 400 if Student is in a different Department.

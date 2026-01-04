@@ -9,6 +9,7 @@ const connectDB = require('./config/db');
 const authRoutes = require('./routes/authRoutes');
 const departmentRoutes = require('./routes/departmentRoutes');
 const userRoutes = require('./routes/userRoutes');
+const quizRoutes = require('./routes/quizRoutes');
 const logger = require('./middlewares/loggerMiddleware');
 
 const app = express();
@@ -33,6 +34,7 @@ require('./config/passport')(passport);
 app.use('/api/auth', authRoutes);
 app.use('/api/departments', departmentRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/quizzes', quizRoutes);
 
 // 404 Handler
 app.use((req, res, next) => {
