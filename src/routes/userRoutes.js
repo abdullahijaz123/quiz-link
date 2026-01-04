@@ -1,14 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const passport = require('passport');
 const userController = require('../controllers/userController');
 const checkRole = require('../middlewares/roleMiddleware');
+const authenticateJwt = require('../middlewares/authMiddleware');
 
 // @route   POST api/users/teacher/add
 // @desc    Add a teacher (Admin only)
 // @access  Private (Admin)
 router.post('/teacher/add',
-    passport.authenticate('jwt', { session: false }),
+    authenticateJwt,
     checkRole(['admin']),
     userController.addTeacher
 );
@@ -17,7 +17,7 @@ router.post('/teacher/add',
 // @desc    Delete a teacher (Admin only)
 // @access  Private (Admin)
 router.delete('/teacher/delete/:id',
-    passport.authenticate('jwt', { session: false }),
+    authenticateJwt,
     checkRole(['admin']),
     userController.deleteTeacher
 );

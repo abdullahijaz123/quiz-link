@@ -34,6 +34,17 @@ app.use('/api/auth', authRoutes);
 app.use('/api/departments', departmentRoutes);
 app.use('/api/users', userRoutes);
 
+// 404 Handler
+app.use((req, res, next) => {
+    res.status(404).json({ msg: `Route not found: ${req.originalUrl}` });
+});
+
+// Global Error Handler
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).json({ msg: 'Server Error', error: err.message });
+});
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
