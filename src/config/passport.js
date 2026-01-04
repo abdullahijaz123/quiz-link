@@ -1,10 +1,21 @@
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
+
+const customExtractor = (req) => {
+    let token = null;
+    if (req && req.headers) {
+        token = req.headers['authorization'];
+        if (token && token.startsWith('Bearer ')) {
+            token = token.slice(7, token.length);
+        }
+    }
+    return token;
+};
 const LocalStrategy = require('passport-local').Strategy;
 const User = require('../models/User');
 
 const options = {};
-options.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
+options.jwtFromRequest = customExtractor;
 options.secretOrKey = process.env.JWT_SECRET || 'secret';
 
 module.exports = (passport) => {
