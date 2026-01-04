@@ -173,3 +173,58 @@
     ```
 *   **Response**: Returns Assignment object.
     *   *Error*: Returns 400 if Student is in a different Department.
+
+### Student Quiz Access
+
+#### 1. Get Pending Quizzes (Student)
+*   **Endpoint**: `GET /api/quizzes/student/pending`
+*   **Access**: Private (Student)
+*   **Response**:
+    ```json
+    [
+        {
+            "assignmentId": "...",
+            "quizId": "...",
+            "title": "Math Quiz 1",
+            "description": "...",
+            "questions": [
+                {
+                    "_id": "...",
+                    "questionText": "What is 2+2?",
+                    "options": [ ... ]
+                }
+            ]
+        }
+    ]
+    ```
+
+#### 2. Submit Quiz (Student)
+*   **Endpoint**: `POST /api/quizzes/student/submit`
+*   **Access**: Private (Student)
+*   **Payload**:
+    ```json
+    {
+        "quizId": "...",
+        "answers": [
+            { "questionId": "...", "selectedKey": "a" },
+            { "questionId": "...", "selectedKey": "b" }
+        ]
+    }
+    ```
+*   **Response**:
+    ```json
+    {
+        "msg": "Quiz submitted successfully",
+        "score": 100,
+        "totalQuestions": 5,
+        "correctAnswers": 5,
+        "results": [
+            {
+                "questionId": "...",
+                "isCorrect": true,
+                "correctAnswer": "a",
+                "selectedKey": "a"
+            }
+        ]
+    }
+    ```

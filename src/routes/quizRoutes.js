@@ -31,4 +31,31 @@ router.post('/assign',
     quizController.assignQuiz
 );
 
+// @route   GET api/quizzes/student/pending
+// @desc    Get pending quizzes for logged in student
+// @access  Private (Student)
+router.get('/student/pending',
+    authenticateJwt,
+    checkRole(['student']),
+    quizController.getStudentQuizzes
+);
+
+// @route   POST api/quizzes/student/submit
+// @desc    Submit a quiz
+// @access  Private (Student)
+router.post('/student/submit',
+    authenticateJwt,
+    checkRole(['student']),
+    quizController.submitQuiz
+);
+
+// @route   GET api/quizzes/results/:quizId
+// @desc    Get results for a specific quiz (Teacher only)
+// @access  Private (Teacher/Admin)
+router.get('/results/:quizId',
+    authenticateJwt,
+    checkRole(['teacher', 'admin']),
+    quizController.getQuizResults
+);
+
 module.exports = router;
